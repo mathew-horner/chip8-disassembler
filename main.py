@@ -1,3 +1,6 @@
+import os.path
+import sys
+
 class Nibbles16Bit:
     def __init__(self, number: int):
         self._number = number
@@ -109,4 +112,15 @@ def disassemble_file(filepath: str):
 
 
 if __name__ == '__main__':
-    disassemble_file('Pong.ch8')
+    if len(sys.argv) < 2:
+        print('Usage: python3 main.py <ROM File>')
+        sys.exit(1)
+    
+    filepath = sys.argv[1]
+
+    if not os.path.exists(filepath):
+        print(f'{filepath} does not exist!')
+        sys.exit(1)
+
+    disassemble_file(filepath)
+
